@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity() {
 
             Log.d("New NDEF id", id)
             tv_text.text = id
+
+            val intent = Intent(this, PointActivity::class.java).apply {
+                putExtra("Person", "Hallo")
+            }
+            startActivity(intent)
         }
     }
 
