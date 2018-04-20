@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.app.PendingIntent
 import kotlinx.android.synthetic.main.activity_main.*
 import android.util.Log
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private val ACTION_NDEF_DISCOVERED = "android.nfc.action.TAG_DISCOVERED"
+    val READ_USER = "ch.schmitten.nightminton.READ_USER"
 
     private var nfcAdapter : NfcAdapter? = null
     private var nfcPendingIntent: PendingIntent? = null
@@ -57,10 +59,19 @@ class MainActivity : AppCompatActivity() {
             tv_text.text = id
 
             val intent = Intent(this, PointActivity::class.java).apply {
-                putExtra("Person", "Hallo")
+                putExtra(READ_USER, queryNfc(id).toString())
             }
             startActivity(intent)
         }
+    }
+
+    fun queryNfc(id: String): String{
+        // Request specific user with id
+
+        var response: String
+        response = "{\"name\":\"test name\", \"punkte\":25}"
+
+        return response
     }
 
     // Converting byte[] to hex string:
